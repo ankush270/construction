@@ -14,7 +14,7 @@ const Footer = ({ scrollToSection }) => {
         >
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <img src="/src/assets/logo2.png" alt="ELGC Logo" className="h-6 md:h-8 w-auto" />
+              <img src="/logo2.png" alt="ELGC Logo" className="h-6 md:h-8 w-auto" />
               <span className="ml-2 text-lg md:text-xl font-bold">ELGC</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md text-sm md:text-base">
@@ -56,7 +56,7 @@ const Footer = ({ scrollToSection }) => {
           <div>
             <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Contact Info</h3>
             <div className="space-y-2 text-gray-300 text-sm md:text-base">
-              <p>📞 +1 (555) 123-4567</p>
+              <p>📞+971 2 6727226</p>
               <p>✉️ info@elgc.com</p>
               <p>📍 123 Construction Ave, City, State 12345</p>
             </div>

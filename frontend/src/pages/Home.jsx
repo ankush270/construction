@@ -6,6 +6,7 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import Projects from '../components/Projects'
 import Clients from '../components/Clients'
 import Gallery from '../components/Gallery'
+import Blog from '../components/Blog'
 import Testimonials from '../components/Testimonials'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
@@ -28,6 +29,7 @@ const Home = () => {
       <Projects />
       <Clients />
       <Gallery />
+      <Blog />
       <Testimonials />
       <CTA />
       <Footer scrollToSection={scrollToSection} />
