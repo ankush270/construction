@@ -5,6 +5,7 @@ import Services from '../components/Services'
 import WhyChooseUs from '../components/WhyChooseUs'
 import Projects from '../components/Projects'
 import Clients from '../components/Clients'
+import Gallery from '../components/Gallery'
 import Testimonials from '../components/Testimonials'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
@@ -26,6 +27,7 @@ const Home = () => {
       <WhyChooseUs />
       <Projects />
       <Clients />
+      <Gallery />
       <Testimonials />
       <CTA />
       <Footer scrollToSection={scrollToSection} />
