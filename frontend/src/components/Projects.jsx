@@ -19,6 +19,7 @@ const Projects = () => {
       image: "/project2.jpg",
       description: "Luxury residential development with premium amenities"
     },
+  
     {
       id: 3,
       title: "Industrial Facility",

@@ -6,35 +6,35 @@ const Services = () => {
 
   const services = [
     {
-      icon: "/src/assets/services1.svg",
-      title: "Design, Engineering & Project Management",
-      description: "ELGC excels in providing excellent solutions for Design, Engineering & Project Management needs of the client."
+      title: 'Turnkey Environmental Systems',
+      description: 'Design and implementation of complete environmental solutions for industries and municipalities.',
+      icon: '/services1.svg',
     },
     {
-      icon: "/src/assets/services2.svg",
-      title: "Civil Engineering",
-      description: "ELGC team of experienced engineers & technicians have are adept to handling civil works at all stages of a project."
+      title: 'Water & Wastewater Treatment',
+      description: 'Advanced treatment plants for water purification and wastewater management.',
+      icon: '/services2.svg',
     },
     {
-      icon: "/src/assets/services3.svg",
-      title: "Fabrication Works",
-      description: "ELGC strives to improve manufacturing processes by applying engineering principles & using best practices."
+      title: 'Industrial Piping & Pumping',
+      description: 'Robust piping and pumping systems for industrial applications.',
+      icon: '/services3.svg',
     },
     {
-      icon: "/src/assets/services4.svg",
-      title: "Erection Works",
-      description: "With the core competency in Erection works, ELGC specializes in handling of all types of typical & unconventional erection works."
+      title: 'Civil & Structural Works',
+      description: 'Comprehensive civil construction and structural engineering services.',
+      icon: '/services4.svg',
     },
     {
-      icon: "/src/assets/services5.svg",
-      title: "Electrical & Instrumentation Works",
-      description: "ELGC undertake Electrical & instrumentation works of all nature including Equipment & Panel Installation & Start-up."
+      title: 'Electrical & Instrumentation',
+      description: 'Complete electrical systems and instrumentation for automation and control.',
+      icon: '/services5.svg',
     },
     {
-      icon: "/src/assets/services6.svg",
-      title: "Turnkey Environmental & Pollution Control Systems",
-      description: "ELGC strive towards providing better solutions through a broad portfolio of products & services for Pollution control needs."
-    }
+      title: 'Operation & Maintenance',
+      description: 'Ongoing operation and maintenance services for all installed systems.',
+      icon: '/services6.svg',
+    },
   ]
 
   // Auto-rotate carousel

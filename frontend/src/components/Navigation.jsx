@@ -1,221 +1,121 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const Navigation = ({ scrollToSection }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+const navLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'Services', href: '#services' },
+  { name: 'Why Choose Us', href: '#whychooseus' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Contact', href: '#contact' },
+]
 
-  // Handle scroll effect
+const Navigation = () => {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setScrolled(window.scrollY > 40)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleScrollToSection = (sectionId) => {
-    scrollToSection(sectionId)
-    setIsMobileMenuOpen(false)
-  }
-
-  const navItems = [
-    { name: 'Home', id: 'home' },
-    { name: 'Services', id: 'services' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'About', id: 'about' },
-    { name: 'Contact', id: 'contact' }
-  ]
-
   return (
-    <motion.nav 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-          : 'bg-white/90 backdrop-blur-sm'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 lg:h-20">
-          
-          {/* Logo */}
-          <motion.div 
-            className="flex items-center"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <img src="/src/assets/logo2.png" alt="ELGC Logo" className="h-8 lg:h-10 w-auto" />
-                <motion.div
-                  className="absolute -top-1 -right-1 w-3 h-3 bg-orange-500 rounded-full"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl lg:text-2xl font-bold text-gray-900 leading-none">ELGC</span>
-                <span className="text-xs text-orange-600 font-medium">Engineering & Construction</span>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Desktop Navigation */}
-          <motion.div 
-            className="hidden lg:flex items-center space-x-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            {navItems.map((item, index) => (
-              <motion.button 
-                key={item.id}
-                onClick={() => handleScrollToSection(item.id)} 
-                className="relative px-4 py-2 text-gray-700 hover:text-orange-600 transition-colors duration-300 font-medium group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.name}
-                <motion.div
-                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-600 group-hover:w-full transition-all duration-300"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                />
-              </motion.button>
-            ))}
-          </motion.div>
-          
-          {/* Desktop CTA Button */}
-          <motion.div 
-            className="hidden lg:block"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <motion.button 
-              className="bg-gradient-to-r from-orange-600 to-orange-700 text-white px-6 py-3 rounded-full font-semibold hover:from-orange-700 hover:to-orange-800 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 shadow-lg backdrop-blur' : 'bg-transparent'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2">
+          <motion.img
+            src="/logo2.png"
+            alt="ELGC Logo"
+            className="h-10 w-auto drop-shadow"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+          />
+          <span className="font-extrabold text-xl md:text-2xl text-gray-900 tracking-tight">ELGC</span>
+          <motion.span
+            className="ml-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.7, duration: 0.4 }}
+          />
+        </a>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-2 lg:gap-4">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="relative px-3 py-2 font-medium text-gray-700 hover:text-orange-600 transition-colors duration-200"
             >
-              <span className="relative z-10">Get Quote</span>
-              <motion.div
-                className="absolute inset-0 bg-white/20 rounded-full"
-                initial={{ scale: 0, opacity: 0 }}
-                whileHover={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
-          </motion.div>
-
-          {/* Mobile menu button */}
-          <motion.div 
-            className="lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+              <span>{link.name}</span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))}
+          <a
+            href="#contact"
+            className="ml-4 px-5 py-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow hover:from-orange-600 hover:to-orange-700 transition-colors duration-300"
           >
-            <motion.button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <div className="flex flex-col space-y-1">
-                <motion.span
-                  className="w-5 h-0.5 bg-gray-700 rounded-full"
-                  animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.span
-                  className="w-5 h-0.5 bg-gray-700 rounded-full"
-                  animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.span
-                  className="w-5 h-0.5 bg-gray-700 rounded-full"
-                  animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-            </motion.button>
-          </motion.div>
+            Get a Quote
+          </a>
+        </div>
+        {/* Hamburger */}
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setMenuOpen((open) => !open)}
+            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-600 focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            <svg className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              {menuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </div>
-
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            className="lg:hidden bg-white border-t border-gray-200 shadow-lg"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-white shadow-lg px-4 pt-2 pb-6"
           >
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => handleScrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-3 text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all duration-300 font-medium"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.98 }}
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="py-2 px-2 text-gray-700 font-medium rounded hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  onClick={() => setMenuOpen(false)}
                 >
-                  {item.name}
-                </motion.button>
+                  {link.name}
+                </a>
               ))}
-              
-              <motion.div 
-                className="pt-4 border-t border-gray-200"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.5 }}
+              <a
+                href="#contact"
+                className="mt-2 px-5 py-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow hover:from-orange-600 hover:to-orange-700 transition-colors duration-300 text-center"
+                onClick={() => setMenuOpen(false)}
               >
-                <motion.button 
-                  className="w-full bg-gradient-to-r from-orange-600 to-orange-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-orange-700 hover:to-orange-800 transition-all duration-300 shadow-lg"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get Quote
-                </motion.button>
-              </motion.div>
-
-              {/* Contact Info in Mobile Menu */}
-              <motion.div 
-                className="pt-4 border-t border-gray-200 space-y-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.6 }}
-              >
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  <span>📞 +1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  <span>✉️ info@elgc.com</span>
-                </div>
-              </motion.div>
+                Get a Quote
+              </a>
+              <div className="mt-4 text-sm text-gray-500 text-center">
+                <div>Call us: <a href="tel:+911234567890" className="text-orange-600 font-semibold">+91 12345 67890</a></div>
+                <div>Email: <a href="mailto:info@elgc.com" className="text-orange-600 font-semibold">info@elgc.com</a></div>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Progress Bar */}
-      <motion.div
-        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-orange-600 to-orange-700"
-        initial={{ width: 0 }}
-        animate={{ width: isScrolled ? '100%' : '0%' }}
-        transition={{ duration: 0.3 }}
-      />
-    </motion.nav>
+    </nav>
   )
 }
 

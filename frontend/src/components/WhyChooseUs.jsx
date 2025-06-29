@@ -33,7 +33,7 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <img src="/src/assets/Construction-amico.svg" alt="ELGC Team" className="w-full h-auto max-w-md mx-auto" />
+            <img src="/Construction-amico.svg" alt="ELGC Team" className="w-full h-auto max-w-md mx-auto" />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}

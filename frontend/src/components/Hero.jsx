@@ -1,7 +1,22 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+const heroImages = [
+  '/Construction-amico.svg',
+  '/Construction-bro.svg',
+  '/bridge construction-bro.svg',
+]
 
 const Hero = () => {
+  const [currentImage, setCurrentImage] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length)
+    }, 7000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section id="home" className="relative py-16 md:py-20 lg:py-24 bg-gray-50 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -87,66 +102,28 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Vector Image */}
+          {/* Right Side - Auto-changing Vector Image */}
           <motion.div 
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end items-center"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           >
-            <motion.div
-              className="relative w-full max-w-md lg:max-w-lg"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Main Vector Image */}
-              <motion.img 
-                src="/src/assets/Construction-bro.svg" 
-                alt="Engineering and Construction Services" 
-                className="w-full h-auto"
-                animate={{ 
-                  y: [0, -10, 0],
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              
-              {/* Floating Elements */}
-         
-              
-              <motion.div
-                className="absolute -bottom-4 -left-4 bg-orange-100 rounded-full p-3 shadow-lg"
-                animate={{ 
-                  y: [0, -5, 0],
-                  rotate: [0, -5, 0]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <span className="text-2xl">⚡</span>
-              </motion.div>
-              
-              <motion.div
-                className="absolute top-1/2 -right-8 bg-blue-100 rounded-full p-2 shadow-lg"
-                animate={{ 
-                  x: [0, 5, 0],
-                  y: [0, -3, 0]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <span className="text-xl">🔧</span>
-              </motion.div>
-            </motion.div>
+            <div className="relative w-full max-w-xl lg:max-w-2xl min-h-[400px] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={heroImages[currentImage]}
+                  src={heroImages[currentImage]}
+                  alt="Engineering and Construction Services"
+                  className="w-full h-auto max-h-[28rem] object-contain drop-shadow-xl"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.7 }}
+                  loading="lazy"
+                />
+              </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </div>
